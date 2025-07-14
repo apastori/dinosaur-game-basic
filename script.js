@@ -11,14 +11,28 @@ let gameStarted = false;
 // Dinosaur properties
 const dinosaur = {
     x: 50,
-    y: canvas.height - 30,
-    width: 20,
-    height: 30,
+    y: canvas.height - 50, // Adjusted for new height
+    width: 40, // Adjusted for new width
+    height: 50, // Adjusted for new height
     velocityY: 0,
     isJumping: false,
     draw() {
-        ctx.fillStyle = '#555';
-        ctx.fillRect(this.x, this.y, this.width, this.height);
+        ctx.fillStyle = '#555'; // Dinosaur color
+
+        // Body
+        ctx.beginPath();
+        ctx.moveTo(this.x, this.y + this.height);
+        ctx.lineTo(this.x + this.width * 0.7, this.y + this.height);
+        ctx.lineTo(this.x + this.width, this.y + this.height * 0.6);
+        ctx.lineTo(this.x + this.width * 0.9, this.y + this.height * 0.2);
+        ctx.lineTo(this.x + this.width * 0.6, this.y);
+        ctx.lineTo(this.x + this.width * 0.2, this.y + this.height * 0.1);
+        ctx.closePath();
+        ctx.fill();
+
+        // Legs (simple rectangles for now)
+        ctx.fillRect(this.x + this.width * 0.1, this.y + this.height * 0.8, this.width * 0.2, this.height * 0.2);
+        ctx.fillRect(this.x + this.width * 0.5, this.y + this.height * 0.8, this.width * 0.2, this.height * 0.2);
     },
     jump() {
         if (!this.isJumping) {
@@ -31,7 +45,7 @@ const dinosaur = {
         this.velocityY += 0.5; // Gravity
 
         if (this.y > canvas.height - this.height) {
-            this.y = canvas.height - this.height;
+            this.y = canvas.height - this.height - 5; // Adjusted to be slightly above the ground
             this.isJumping = false;
             this.velocityY = 0;
         }
@@ -48,8 +62,14 @@ class Obstacle {
     }
 
     draw() {
-        ctx.fillStyle = '#333';
+        ctx.fillStyle = '#333'; // Obstacle color
+
+        // Main body of cactus
         ctx.fillRect(this.x, this.y, this.width, this.height);
+
+        // Arms of cactus
+        ctx.fillRect(this.x - this.width * 0.3, this.y + this.height * 0.4, this.width * 0.4, this.height * 0.2);
+        ctx.fillRect(this.x + this.width * 0.9, this.y + this.height * 0.2, this.width * 0.2, this.height * 0.3);
     }
 
     update() {
@@ -60,8 +80,8 @@ class Obstacle {
 let obstacles = [];
 
 function generateObstacle() {
-    const obstacleWidth = 10 + Math.random() * 10;
-    const obstacleHeight = 20 + Math.random() * 20;
+    const obstacleWidth = 20 + Math.random() * 10; // Adjusted width
+    const obstacleHeight = 30 + Math.random() * 20; // Adjusted height
     const obstacleX = canvas.width;
     const obstacleY = canvas.height - obstacleHeight;
     obstacles.push(new Obstacle(obstacleX, obstacleY, obstacleWidth, obstacleHeight));
