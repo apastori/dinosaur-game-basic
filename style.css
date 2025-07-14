@@ -1,0 +1,37 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    background-color: #f7f7f7;
+    font-family: 'Press Start 2P', cursive;
+    overflow: hidden;
+}
+
+.game-container {
+    text-align: center;
+    border: 2px solid #333;
+    padding: 10px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+canvas {
+    background-color: #eee;
+    display: block;
+    margin: 0 auto;
+}
+
+.score-container {
+    margin-top: 10px;
+    font-size: 1.2em;
+    color: #555;
+}
+
+.start-message {
+    margin-top: 20px;
+    font-size: 1.5em;
+    color: #777;
+    display: block; /* Will be hidden by JS when game starts */
+}
